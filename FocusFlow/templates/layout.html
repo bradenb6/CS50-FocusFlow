@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Site{% endblock %}</title>
+
+    <!-- CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    <!-- NAVIGATION BAR -->
+    <nav>
+        <a href="{{ url_for('index') }}">Dashboard</a>
+        <a href="{{ url_for('tasks') }}">Tasks</a>
+        <a href="{{ url_for('goals') }}">Goals</a>
+        <a href="{{ url_for('journal') }}">Journal</a>
+        <button id="start-session-btn" class="study-nav-btn">Study</button>
+    </nav>
+
+    <!-- Page-specific content -->
+    <div class="page-content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <!-- JS loaded at bottom of page -->
+    {% block scripts %}{% endblock %}
+</body>
+</html>

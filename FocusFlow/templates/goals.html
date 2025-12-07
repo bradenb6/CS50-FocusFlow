@@ -1,0 +1,86 @@
+{% extends "layout.html" %}
+
+{% block title %}Goals{% endblock %}
+
+{% block content %}
+    <div class="goals-container">
+
+        <div class="center-btn">
+            <button class="toggle-form-btn" onclick="toggleGoalForm()">Add Goal +</button>
+        </div>
+
+        <div id="goal-form" class="goal-form hidden">
+            <form action="{{ url_for('goals') }}" method="POST">
+                <label>Goal</label>
+                <input type="text" name="goal" required>
+
+                <label>Description</label>
+                <textarea name="description" rows="3" required></textarea>
+
+                <label>Deadline</label>
+                <input type="date" name="deadline" required>
+
+                <button type="submit" class="save-btn">Add Goal</button>
+            </form>
+        </div>
+
+        <div class="goals-list">
+            <h2>Your Goals</h2>
+
+            {% if goals %}
+                <ul class="goal-list">
+            {% for goal in goals %}
+                <li class="goal-item">
+                    <strong>{{ goal["title"] }}</strong>
+                    <p>{{ goal["description"] }}</p>
+                    <span class="deadline">Deadline: {{ goal["deadline"] }}</span>
+
+                    <div class="goal-buttons">
+                        <div class="goal-buttons">
+                        <button class="edit-btn"
+                            onclick="openEditModal(
+                                {{ goal['id'] }},
+                                '{{ goal['title']|escape }}',
+                                '{{ goal['description']|escape }}',
+                                '{{ goal['deadline'] }}'
+                            )">
+                            Edit
+                        </button>
+
+                            <!-- DELETE -->
+                        <form method="POST" action="/goals/delete/{{ goal['id'] }}">
+                            <button class="delete-btn" type="submit">Delete</button>
+                        </form>
+                    </div>
+                </li>
+            {% endfor %}
+            </ul>
+            {% else %}
+                <p class="no-goals">No goals added yet.</p>
+            {% endif %}
+        </div>
+        <div id="edit-modal" class="modal hidden">
+        <div class="modal-content">
+            <h2>Edit Goal</h2>
+
+            <form id="edit-form" method="POST">
+                <label>Goal: </label>
+                <input type="text" name="goal" id="edit-title" required>
+
+                <label>Description: </label>
+                <textarea name="description" id="edit-description" rows="3" required></textarea>
+
+                <label>Deadline: </label>
+                <input type="date" name="deadline" id="edit-deadline" required>
+
+                <button type="submit">Save Changes</button>
+                <button type="button" class="close-modal" onclick="closeEditModal()">Cancel</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='goals.js') }}"></script>
+{% endblock %}

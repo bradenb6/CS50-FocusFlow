@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+
+{% block title %}Calendar{% endblock %}
+
+{% block content %}
+    <div class="journal">
+        <div class="center-btn">
+            <button class="toggle-form-btn" onclick="toggleJournalForm()">New Entry +</button>
+        </div>
+
+        <div id="journal-entry" class="journal-entry hidden">
+            <form method="POST" action="{{ url_for('journal') }}">
+                <label class="entry-header">What's on your mind?</label>
+                <textarea name="entry" rows="5" required></textarea>
+
+                <label>Date</label>
+                <input type="date" name="date" required>
+
+                <button type="submit" class="save-btn">Enter Journal</button>
+            </form>
+        </div>
+
+        <div class="entries-header">
+            <h2>Your Entries: </h2>
+        </div>
+
+        <ul class="journal-list">
+            {% for j in entries %}
+                <li class="journal-item">
+
+                    <button class="journal-entry-btn" onclick="toggleEntry({{ j['id'] }})">
+                        {{ j["date"] }}
+                    </button>
+
+                    <div id="entry-{{ j['id'] }}" class="journal-content hidden">
+                        <p id="content-{{ j['id'] }}">{{ j["content"] }}</p>
+
+                        <div class="journal-buttons">
+                            <button type="button" onclick="startEdit({{ j['id'] }})" class="edit-btn">Edit</button>
+
+                            <form method="POST" action="/journal/delete/{{ j['id'] }}">
+                                <button class="delete-btn">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <div id="edit-{{ j['id'] }}" class="hidden edit-section">
+                        <textarea id="edit-text-{{ j['id'] }}" rows="5">{{ j["content"] }}</textarea>
+                        <button onclick="saveEdit({{ j['id'] }})" class="save-btn">Save</button>
+                        <button onclick="cancelEdit({{ j['id'] }})" class="cancel-btn">Cancel</button>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='journal.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,970 @@
+/* =======================
+   VERSION A.2 — FULL OPTIMIZED & FIXED
+   Part 1 of 4
+   (VARIABLES, GLOBAL, UTILITIES, BUTTONS, CARDS, NAVBAR, CALENDAR BASICS)
+   ======================= */
+
+/* ---------------- VARIABLES ---------------- */
+:root {
+  --bg: #f8f8f8;
+  --card: #ffffff;
+  --text: #222;
+  --accent: #4a6cf5;
+  --accent-hover: #3d58c8;
+  --nav-bg: #0037b7;
+  --danger: #e74c3c;
+  --muted: #777;
+  --shadow-1: 0 3px 12px rgba(0,0,0,0.08);
+  --shadow-2: 0 8px 25px rgba(0,0,0,0.10);
+  --radius-lg: 14px;
+  --radius-md: 10px;
+  --radius-sm: 6px;
+  --transition-fast: 0.2s ease;
+  --page-top-offset: 120px; /* ensures content clears fixed navbar */
+}
+
+/* ---------------- RESET & GLOBALS ---------------- */
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding-top: 40px;
+}
+
+/* ensure main page content stretches full width if needed */
+.page-content { width: 100%; }
+
+/* ---------------- UTILITIES ---------------- */
+.hidden { display: none !important; }
+.center-btn { display: flex; justify-content: center; margin-bottom: 15px; }
+.entries-header { text-align: center; }
+
+/* ---------------- BUTTONS (centralized) ---------------- */
+.btn {
+  padding: 8px 14px;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-weight: 600;
+  transition: background var(--transition-fast), transform var(--transition-fast);
+  display: inline-block;
+  text-align: center;
+}
+
+.btn:hover { transform: translateY(-2px); }
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+.btn-primary:hover { background: var(--accent-hover); }
+
+.btn-danger {
+  background: var(--danger);
+  color: #fff;
+}
+
+.btn-light {
+  background: #ccc;
+  color: #222;
+}
+
+/* Keep the existing class names your HTML uses while mapping them to consistent visuals */
+.save-btn { padding: 10px; border-radius: 8px; background: var(--accent); color: white; }
+.edit-btn { padding: 6px 12px; border-radius: 6px; background: var(--accent); color: white; }
+.delete-btn { padding: 6px 12px; border-radius: 6px; background: var(--danger); color: white; }
+.cancel-btn { padding: 10px; border-radius: 8px; background: #ccc; color: #222; }
+
+/* small action button hover consistency */
+.edit-btn:hover, .save-btn:hover { background: var(--accent-hover); }
+
+/* ---------------- REUSABLE CARD / FORM STYLES ---------------- */
+.card {
+  background: var(--card);
+  padding: 20px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-1);
+}
+
+/* Map commonly used page blocks to card style for consistent look */
+.goal-form, .goal-list,
+.task-form, .tasks-list,
+.journal-entry {
+  background: var(--card);
+  padding: 20px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-1);
+  margin-bottom: 25px;
+}
+
+/* Form controls */
+input[type="text"], input[type="date"], input[type="time"],
+textarea, select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+/* ---------------- NAVBAR ---------------- */
+nav {
+  width: 100%;
+  background: var(--nav-bg);
+  padding: 20px 30px;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  transition: padding 0.3s ease, background 0.3s ease;
+}
+
+/* reduced padding state (keeps original behavior) */
+nav.shrink { padding: 8px 30px; }
+
+nav a {
+  text-decoration: none;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: font-size 0.3s ease, transform 0.3s ease;
+}
+nav.shrink a { font-size: 1rem; }
+nav a:hover { background: rgba(255,255,255,0.2); transform: translateY(-2px); }
+nav a.active { background: rgba(255,255,255,0.35); font-weight: 700; }
+
+/* Study button in nav (keeps original placement) */
+.study-nav-btn {
+  margin-left: auto;
+  background: var(--accent);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+.study-nav-btn:hover { background: var(--accent-hover); }
+
+/* ---------------- CALENDAR CONTAINER & HEADER ---------------- */
+.calendar-container {
+  margin-top: calc(var(--page-top-offset) - 50px); /* visually similar to original; can be overridden later */
+  background: var(--card);
+  padding: 20px 30px;
+  border-radius: 12px;
+  box-shadow: var(--shadow-2);
+  width: 90%;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Month/year header */
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+.calendar-header h2 { margin: 0; font-size: 1.4rem; font-weight: 600; }
+
+/* Prev/Next buttons: keep look consistent */
+.calendar-header button {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+.calendar-header button:hover { background: #6a84ff; }
+
+/* Calendar table (ID corrected) */
+#calendarDates {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+#calendarDates th {
+  padding: 10px 0;
+  color: #555;
+  font-weight: 600;
+  border-bottom: 2px solid #e1e1e1;
+}
+#calendarDates td {
+  border: 1px solid #ddd;
+  background: white;
+  padding: 14px;
+  height: 60px;
+  width: 60px;
+  vertical-align: top;
+  text-align: left;
+}
+#calendarDates td:hover { background: #a3b6ff; }
+#calendarDates td b {
+  display: inline-block;
+  background: #eef2ff;
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+
+/* ---------------- SMALL LAYOUT HELPERS ---------------- */
+.tasks-container, .goals-container {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+}
+
+/* Toggle large form button kept visually identical */
+.toggle-form-btn {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 16px 100px;
+  font-size: 32px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 650;
+  margin-bottom: 15px;
+}
+.toggle-form-btn:hover { background: var(--accent-hover); }
+
+/* Ensure day container exists and centered (explicit here for Part1) */
+.day-container { max-width: 900px; margin-left: auto; margin-right: auto; }
+
+/* =======================
+   VERSION A.2 — FULL OPTIMIZED & FIXED
+   Part 2 of 4
+   (CALENDAR ADVANCED, TASKS, TASK MODAL)
+   ======================= */
+
+/* ---------- CALENDAR — ACTIVE DAY / TODAY MARKERS ---------- */
+.calendar-today {
+  background: #dfe6ff !important;
+  border: 2px solid var(--accent) !important;
+  font-weight: bold;
+}
+
+.calendar-has-event {
+  background: #eef2ff;
+  border-left: 4px solid var(--accent);
+}
+
+/* ---------- CALENDAR — EVENT DOTS IN CELLS ---------- */
+.calendar-event-dot {
+  width: 7px;
+  height: 7px;
+  background: var(--accent);
+  border-radius: 50%;
+  margin-top: 4px;
+}
+
+/* ============================================
+   TASKS PAGE
+   ============================================ */
+
+.tasks-container {
+  margin-top: var(--page-top-offset);
+}
+
+.task-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.task-form input,
+.task-form textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: var(--radius-md);
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.task-form textarea {
+  min-height: 70px;
+}
+
+/* Save button inside tasks form */
+.task-form .save-btn {
+  padding: 10px;
+  border-radius: 8px;
+  background: var(--accent);
+  color: white;
+  cursor: pointer;
+  border: none;
+}
+.task-form .save-btn:hover {
+  background: var(--accent-hover);
+}
+
+/* ---------- TASKS LIST ---------- */
+.tasks-list { margin-top: 25px; }
+
+.task-item {
+  background: #f5f7ff;
+  padding: 15px;
+  border-radius: var(--radius-lg);
+  margin-bottom: 15px;
+  border-left: 6px solid var(--accent);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.task-title {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.task-desc {
+  color: #444;
+  white-space: pre-wrap;
+}
+
+.task-date {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.task-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.task-buttons .edit-btn,
+.task-buttons .delete-btn {
+  padding: 7px 12px;
+  border-radius: var(--radius-sm);
+  border: none;
+  cursor: pointer;
+}
+
+.task-buttons .edit-btn { background: var(--accent); color: white; }
+.task-buttons .delete-btn { background: var(--danger); color: white; }
+
+/* Button hover fixes */
+.task-buttons .edit-btn:hover { background: var(--accent-hover); }
+.task-buttons .delete-btn:hover { filter: brightness(0.9); }
+
+/* ---------- EMPTY TASK MESSAGE ---------- */
+.no-tasks {
+  text-align: center;
+  color: var(--muted);
+  padding: 20px;
+  font-style: italic;
+}
+
+/* ============================================
+   TASKS — EDIT MODAL (420px preserved)
+   ============================================ */
+
+#edit-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+#edit-modal.hidden { display: none !important; }
+
+#edit-modal .modal-content {
+  width: 420px;             /* PRESERVED */
+  background: white;
+  padding: 25px;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 5px 22px rgba(0,0,0,0.18);
+  animation: fadeIn 0.2s ease;
+}
+
+#edit-form label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+#edit-form input,
+#edit-form textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: var(--radius-md);
+  border: 1px solid #ccc;
+  margin-bottom: 15px;
+  font-size: 1rem;
+}
+
+#edit-form input:focus,
+#edit-form textarea:focus {
+  border-color: var(--accent);
+}
+
+/* Save + Cancel buttons inside modal */
+#edit-modal .modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+#edit-modal .save-btn { background: var(--accent); color: white; }
+#edit-modal .cancel-btn { background: #ccc; color: #222; }
+
+/* subtle animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* =======================
+   VERSION A.2 — FULL OPTIMIZED & FIXED
+   Part 3 of 4
+   (GOALS, JOURNAL, JOURNAL BUTTON FIX)
+   ======================= */
+
+/* ============================================
+   GOALS PAGE
+   ============================================ */
+
+.goals-container {
+  margin-top: var(--page-top-offset);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+}
+
+/* ---------- Goal Form ---------- */
+.goal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.goal-form input,
+.goal-form textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: var(--radius-md);
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.goal-form textarea {
+  min-height: 70px;
+}
+
+.goal-form .save-btn {
+  padding: 10px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+}
+
+.goal-form .save-btn:hover {
+  background: var(--accent-hover);
+}
+
+/* ---------- Goals List ---------- */
+.goal-list {
+  margin-top: 25px;
+}
+
+.goal-item {
+  background: #f8f9ff;
+  padding: 15px;
+  border-radius: var(--radius-md);
+  margin-bottom: 15px;
+  border-left: 6px solid var(--accent);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.goal-title {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.goal-desc {
+  color: #444;
+  white-space: pre-wrap;
+}
+
+.goal-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.goal-buttons .edit-btn {
+  background: var(--accent);
+  color: white;
+  border-radius: var(--radius-sm);
+  padding: 7px 12px;
+}
+
+.goal-buttons .delete-btn {
+  background: var(--danger);
+  color: white;
+  border-radius: var(--radius-sm);
+  padding: 7px 12px;
+}
+
+.goal-buttons .edit-btn:hover { background: var(--accent-hover); }
+
+/* ---------- No Goals Placeholder ---------- */
+.no-goals {
+  color: var(--muted);
+  text-align: center;
+  padding: 20px;
+  font-style: italic;
+}
+
+/* ---------- Goals Edit Modal (420px preserved) ---------- */
+
+.goals-container #edit-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.goals-container #edit-modal.hidden {
+  display: none !important;
+}
+
+.goals-container #edit-modal .modal-content {
+  width: 420px; /* PRESERVE ORIGINAL */
+  background: white;
+  padding: 25px 30px;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 5px 22px rgba(0,0,0,0.18);
+  animation: fadeIn .2s ease;
+}
+
+.goals-container #edit-form label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.goals-container #edit-form input,
+.goals-container #edit-form textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: var(--radius-md);
+  border: 1px solid #ccc;
+  margin-bottom: 15px;
+}
+
+.goals-container #edit-form input:focus,
+.goals-container #edit-form textarea:focus {
+  border-color: var(--accent);
+}
+
+/* CANCEL button inside goals modal */
+.goals-container #edit-modal .cancel-btn {
+  background: #ccc;
+  color: #222;
+}
+
+/* ============================================
+   JOURNAL PAGE
+   ============================================ */
+
+/* ---------- MAIN journal container (FIX FOR NAVBAR OVERLAP) ---------- */
+.journal {
+  margin-top: var(--page-top-offset) !important;   /* THIS FIXES YOUR BUTTON ISSUE */
+}
+
+/* The section that contains the “New Entry +” button */
+.center-btn {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+/* New Entry Button */
+.toggle-form-btn {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 16px 100px;
+  font-size: 32px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 650;
+  margin-bottom: 15px;
+}
+
+.toggle-form-btn:hover {
+  background: var(--accent-hover);
+}
+
+/* ---------- Journal Entry Form ---------- */
+.journal-entry {
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.journal-entry label {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.journal-entry textarea,
+.journal-entry input[type="date"] {
+  width: 100%;
+  padding: 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid #ccc;
+  margin-bottom: 16px;
+  font-size: 1rem;
+}
+
+/* Submit button for journal */
+.journal-entry-btn {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  background: var(--accent);
+  color: white;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  margin-bottom: 8px;
+  border: none;
+}
+
+.journal-entry-btn:hover {
+  background: var(--accent-hover);
+}
+
+/* ---------- Journal List ---------- */
+.journal-list {
+  list-style: none;
+  padding: 0;
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.journal-item {
+  background: var(--card);
+  padding: 14px 18px;
+  margin-bottom: 15px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-1);
+}
+
+.journal-title {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.journal-content {
+  background: #ffffff;
+  padding: 18px;
+  border-radius: var(--radius-md);
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  white-space: pre-wrap;
+}
+
+.journal-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.journal-buttons .edit-btn { background: var(--accent); color: white; }
+.journal-buttons .delete-btn { background: var(--danger); color: white; }
+
+/* ---------- No Entries Placeholder ---------- */
+.no-entries {
+  text-align: center;
+  padding: 20px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* =======================
+   VERSION A.2 — FULL OPTIMIZED & FIXED
+   Part 4 of 4 (FINAL)
+   (STUDY MODE, DAY VIEW, EVENT MODALS, FINAL CLEANUP)
+   ======================= */
+
+/* =======================
+   STUDY MODE (SESSION BANNER + CONTROLS)
+   ======================= */
+
+.session-banner {
+  width: 100%;
+  background: var(--accent);
+  color: white;
+  padding: 14px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 22px;
+  font-weight: bold;
+  position: fixed;
+  top: calc(var(--page-top-offset) - 55px); /* positions banner beneath nav */
+  left: 0;
+  z-index: 900;
+}
+
+/* end session button */
+.end-session-btn {
+  background: white;
+  color: var(--accent);
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* session badges / details */
+.session-badge {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-size: 12px;
+  cursor: pointer;
+  margin-top: 4px;
+}
+
+.session-details {
+  margin-top: 6px;
+  background: #f7f7ff;
+  border: 1px solid #d5d5ff;
+  border-radius: 8px;
+  padding: 8px;
+  font-size: 12px;
+}
+.detail-row {
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #e5e5ff;
+}
+.detail-row:last-child { border-bottom: none; }
+
+/* =======================
+   REFLECTION MODAL (session notes) - 450px preserved
+   ======================= */
+
+#session-notes-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.reflection-modal-content {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 450px; /* PRESERVED ORIGINAL */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  z-index: 1000;
+}
+
+.reflection-title { margin-top: 0; text-align: center; }
+.reflection-textarea { width: 100%; min-height: 120px; padding: 10px; border-radius: 10px; border: 1px solid #ccc; }
+.reflection-buttons { display: flex; justify-content: space-between; margin-top: 10px; }
+.reflection-save-btn { background: var(--accent); color: white; border: none; padding: 10px; border-radius: 8px; cursor: pointer; }
+.reflection-cancel-btn { background: #ccc; border: none; padding: 10px; border-radius: 8px; cursor: pointer; }
+
+/* =======================
+   DAY VIEW (Hourly Grid)
+   ======================= */
+
+.day-container {
+  margin-top: var(--page-top-offset);
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  background: var(--card);
+  padding: 25px;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+}
+
+#dayGrid {
+  margin-top: 20px;
+  background: #f9fafc;
+  padding: 15px;
+  border-radius: 12px;
+  border: 1px solid #e4e6eb;
+}
+
+.hour {
+  padding: 10px 10px 0 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: #566;
+  text-align: right;
+}
+
+.slot {
+  height: 60px;
+  border-bottom: 1px solid #eaeaea;
+  position: relative;
+  background: white;
+}
+
+/* =======================
+   EVENT BLOCKS
+   ======================= */
+
+.event {
+  background: var(--event-color, var(--accent));
+  color: white;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 13px;
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  top: 8px;
+  cursor: pointer;
+}
+
+.event-buttons {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  display: flex;
+  gap: 4px;
+}
+.event-buttons.hidden { display: none !important; }
+
+.event-buttons button {
+  border: none;
+  padding: 2px 5px;
+  border-radius: 4px;
+  background: rgba(0,0,0,0.3);
+  color: white;
+  cursor: pointer;
+}
+
+/* =======================
+   EVENT MODAL (350px preserved)
+   ======================= */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+#eventModal {
+  background: #fff;
+  width: 350px; /* PRESERVED ORIGINAL */
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+}
+
+#eventModal h3 { margin-top: 0; text-align: center; }
+
+.event-form-row { display: flex; flex-direction: column; margin-bottom: 14px; }
+.event-form-row label { font-weight: bold; margin-bottom: 5px; }
+
+#eventModal input,
+#eventModal select {
+  padding: 6px;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+/* Event modal button rows */
+.event-modal-buttons, .event-modal-btns { display: flex; justify-content: space-between; margin-top: 10px; }
+
+.event-save-btn { background: var(--accent); color: white; padding: 8px 14px; border: none; border-radius: 6px; cursor: pointer; }
+.event-cancel-btn { background: #ccc; padding: 8px 14px; border: none; border-radius: 6px; cursor: pointer; }
+
+/* =======================
+   FINAL CONSISTENCY & SAFETY
+   ======================= */
+
+/* Ensure hidden always wins */
+.hidden { display: none !important; }
+
+/* Ensure modals always appear on top */
+.modal, .modal-overlay { z-index: 999; }
+
+/* Safety: ensure top offset for forms and main containers is consistent */
+.calendar-container,
+.tasks-container,
+.goals-container,
+.journal,
+.journal-entry,
+.day-container {
+  margin-top: var(--page-top-offset);
+}
+
+/* Ensure central alignment */
+.calendar-container,
+.tasks-container,
+.goals-container,
+.journal,
+.journal-entry,
+.day-container {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Ensure toggles/buttons in forms are visible and not hidden under nav */
+.center-btn, .toggle-form-btn, .journal-entry-btn {
+  margin-top: 0;
+}
+
+/* End of Version A.2 */

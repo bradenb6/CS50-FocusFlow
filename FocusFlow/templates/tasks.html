@@ -1,0 +1,96 @@
+{% extends "layout.html" %}
+
+{% block title %}Tasks{% endblock %}
+
+{% block content %}
+<div class="tasks-container">
+
+    <div class="center-btn">
+        <button class="toggle-form-btn" onclick="toggleTaskForm()">Add Task +</button>
+    </div>
+
+    <!-- ADD TASK FORM -->
+    <div id="task-form" class="task-form hidden">
+        <form action="/tasks" method="POST">
+
+            <label>Task</label>
+            <input type="text" name="title" required>
+
+            <label>Description</label>
+            <textarea name="description" rows="3" required></textarea>
+
+            <label>Deadline</label>
+            <input type="date" name="deadline" required>
+
+            <button type="submit" class="save-btn">Add Task</button>
+        </form>
+    </div>
+
+    <!-- LIST OF TASKS -->
+    <div class="tasks-list">
+        <h2>Your Tasks</h2>
+
+        {% if tasks %}
+        <ul class="task-list">
+
+            {% for t in tasks %}
+            <li class="task-item">
+                <strong>{{ t["title"] }}</strong>
+                <p>{{ t["description"] }}</p>
+                <span class="deadline">Deadline: {{ t["deadline"] }}</span>
+
+                <div class="task-buttons">
+                    <button class="edit-btn"
+                        onclick="openEditModal(
+                            {{ t['id'] }},
+                            '{{ t['title']|escape }}',
+                            '{{ t['description']|escape }}',
+                            '{{ t['deadline'] }}'
+                        )">
+                        Edit
+                    </button>
+
+                    <form method="POST" action="/tasks/delete/{{ t['id'] }}">
+                        <button class="delete-btn" type="submit">Delete</button>
+                    </form>
+                </div>
+            </li>
+            {% endfor %}
+
+        </ul>
+
+        {% else %}
+        <p class="no-tasks">No tasks added yet.</p>
+        {% endif %}
+    </div>
+
+</div>
+
+<!-- EDIT MODAL -->
+<div id="edit-modal" class="modal hidden">
+    <div class="modal-content">
+        <h2>Edit Task</h2>
+
+        <form id="edit-form" method="POST">
+            <label>Task</label>
+            <input type="text" name="title" id="edit-title" required>
+
+            <label>Description</label>
+            <textarea name="description" id="edit-description" rows="3" required></textarea>
+
+            <label>Deadline</label>
+            <input type="date" name="deadline" id="edit-deadline" required>
+
+            <div class="modal-buttons">
+                <button class="save-btn" type="submit">Save Changes</button>
+                <button type="button" class="cancel-btn" onclick="closeEditModal()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='tasks.js') }}"></script>
+{% endblock %}

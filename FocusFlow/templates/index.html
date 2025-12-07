@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+
+{% block title %}Calendar{% endblock %}
+
+{% block content %}
+    <div id="session-banner" class="hidden session-banner">
+        <span id="session-timer">00:00:00</span>
+        <button id="end-session-btn" class="end-session-btn">End Session</button>
+    </div>
+
+    <div class="calendar-container">
+        <div class="calendar-header">
+            <button id="prevBtn" onclick="prevM()">Previous</button>
+            <h2 id="monthYear"></h2>
+            <button id="nextBtn" onclick="nextM()">Next</button>
+            <!-- <button id="start-session-btn" class="session-btn">Start Session</button> -->
+        </div>
+        <table id="calendarDates">
+            <thead>
+                <tr> 
+                    <th>Sun</th>
+                    <th>Mon</th>
+                    <th>Tue</th>
+                    <th>Wed</th>
+                    <th>Thur</th>
+                    <th>Fri</th>
+                    <th>Sat</th>
+                </tr>
+            </thead>
+            <tbody id="calendarBody">
+            </tbody>
+        </table>
+    </div>
+
+    <div id="session-notes-modal" class="modal-overlay hidden">
+
+        <div class="reflection-modal-content">
+
+            <h2 class="reflection-title">Study Reflection</h2>
+
+            <textarea id="session-notes" class="reflection-textarea"
+                placeholder="What did you work on today?" required></textarea>
+
+            <input type="hidden" id="session-seconds-input">
+            <input type="hidden" id="session-date-input">
+
+            <div class="reflection-buttons">
+                <button id="submit-session-notes" class="reflection-save-btn">Save</button>
+                <button id="cancel-session-notes" class="reflection-cancel-btn">Cancel</button>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+    <!-- <div id="eventPopup" class="event-popup" style="display:none;">
+        <div class="event-popup-content">
+            <h3 id="eventDateDisplay"></h3>
+            <input type="text" id="eventInput" placeholder="Add an event..." />
+            <button id="saveEventBtn">Save Event</button>
+            <button id="closeEventBtn">Close</button>
+        </div>
+    </div> -->
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='calendar.js') }}"></script>
+{% endblock %}

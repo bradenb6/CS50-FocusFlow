@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+
+{% block title %}Day View{% endblock %}
+
+{% block content %}
+
+<div class="day-container">
+    <h2 id="dayLabel">{{ date }}</h2>
+
+    <button onclick="openEventModal()">Add Event</button>
+
+    <div id="dayGrid"></div>
+</div>
+
+<!-- EVENT MODAL -->
+<div id="eventModal" class="modal-overlay hidden">
+    <div class="eventModal-content">
+        <h3 id="eventModalTitle">Add Event</h3>
+        <p id="modalDate">{{ date }}</p>
+        <input id="editEventId" type="hidden">
+
+        <div class="event-form-row">
+            <label>Event Title</label>
+            <input id="eventTitle" placeholder="Study session, exam, etc.">
+
+            <label>Start Time</label>
+            <input id="startTime" type="time">
+
+            <label>End Time:</label>
+            <input id="endTime" type="time">
+
+            <label>Category</label>
+            <select id="category">
+                <option value="School" data-color="#3498db">School</option>
+                <option value="Work" data-color="#e67e22">Work</option>
+                <option value="Personal" data-color="#2ecc71">Personal</option>
+                <option value="Health" data-color="#e74c3c">Health</option>
+                <option value="Other" data-color="#7f8c8d">Other</option>
+            </select>
+        </div>
+
+        <div class="event-modal-btns">
+            <button class="event-save-btn" onclick="saveEvent()">Save</button>
+            <button class="event-cancel-btn" onclick="closeEventModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='days.js') }}"></script>
+{% endblock %}
