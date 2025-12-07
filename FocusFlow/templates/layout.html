@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- works to format and make the code mobile friendly -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}My Site{% endblock %}</title>
 
-    <!-- CSS file -->
+    <!-- CSS file for each page -->
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 
 <body>
-    <!-- NAVIGATION BAR -->
+    <!-- Navigation bar that shows up at the top of each page and connects each page -->
     <nav>
         <a href="{{ url_for('index') }}">Dashboard</a>
         <a href="{{ url_for('tasks') }}">Tasks</a>
@@ -28,4 +29,5 @@
     <!-- JS loaded at bottom of page -->
     {% block scripts %}{% endblock %}
 </body>
+
 </html>
