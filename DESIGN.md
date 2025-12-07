@@ -16,28 +16,6 @@ Daily event scheduling
 
 The system is built for clarity, low friction, and fast local performance.
 
-High-Level Architecture
-┌──────────────────────────┐
-│         Frontend         │
-│  HTML5 • CSS • JavaScript│
-│ (Templates + Static JS)  │
-└──────────────┬───────────┘
-               │
-               │ HTTP & Fetch (AJAX)
-               ▼
-┌──────────────────────────┐
-│         Flask App        │
-│      (Routes, Logic)     │
-└──────────────┬───────────┘
-               │
-               │ SQL Queries
-               ▼
-┌──────────────────────────┐
-│         SQLite DB        │
-│     (Persistent Storage) │
-└──────────────────────────┘
-
-
 The architecture follows a lightweight MVC style:
 
 Models: SQLite tables
