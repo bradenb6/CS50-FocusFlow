@@ -5,10 +5,12 @@
 {% block content %}
     <div class="goals-container">
 
+        <!-- adds the Add Goal button in the center of the screen -->
         <div class="center-btn">
             <button class="toggle-form-btn" onclick="toggleGoalForm()">Add Goal +</button>
         </div>
 
+        <!-- adds the form for the goals that is originally hidden and lets users input the goal, a description, and a deadline -->
         <div id="goal-form" class="goal-form hidden">
             <form action="{{ url_for('goals') }}" method="POST">
                 <label>Goal</label>
@@ -24,6 +26,7 @@
             </form>
         </div>
 
+        <!-- shows each of the goals using a jinja loop to show each goal with the title bolded, a description underneath and buttons -->
         <div class="goals-list">
             <h2>Your Goals</h2>
 
@@ -35,6 +38,7 @@
                     <p>{{ goal["description"] }}</p>
                     <span class="deadline">Deadline: {{ goal["deadline"] }}</span>
 
+                    <!-- adds the edit and delete button for each goal -->
                     <div class="goal-buttons">
                         <div class="goal-buttons">
                         <button class="edit-btn"
@@ -47,7 +51,7 @@
                             Edit
                         </button>
 
-                            <!-- DELETE -->
+                            <!-- delete button -->
                         <form method="POST" action="/goals/delete/{{ goal['id'] }}">
                             <button class="delete-btn" type="submit">Delete</button>
                         </form>
@@ -55,10 +59,12 @@
                 </li>
             {% endfor %}
             </ul>
+            <!-- if there were no goals to add, this is displayed -->
             {% else %}
                 <p class="no-goals">No goals added yet.</p>
             {% endif %}
         </div>
+        <!-- builds the edit modal that pops up when edit is clicked, hidden elsewise  -->
         <div id="edit-modal" class="modal hidden">
         <div class="modal-content">
             <h2>Edit Goal</h2>
@@ -81,6 +87,7 @@
 </div>
 {% endblock %}
 
+<!-- connects this page to goals.js -->
 {% block scripts %}
     <script src="{{ url_for('static', filename='goals.js') }}"></script>
 {% endblock %}
