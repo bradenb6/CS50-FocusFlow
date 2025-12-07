@@ -44,16 +44,19 @@ Features
   -  Event modals with category → color mapping
 
 Installation
-1. Clone the repo
-git clone 
+1. Clone the repo. 
+At the green code button, download folder. This will give you a zip folder. Find Zip folder in download and press extract all. 
 
 2. Install dependencies
-pip install flask
+Install VS code and python if not done already
 
-3. Run the server
-python app.py
+3. Open Folder
+In VS code upload folder to VS code
 
-4. Open in browser
+5. Run the server
+using the function python app.py
+
+6. Open in browser
 Find HTML link in browser
 
 Database Schema
