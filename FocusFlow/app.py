@@ -109,7 +109,7 @@ def edit_goal(id):
 def index():
     return render_template("index.html")
 
-# save session route that uses POST and JSON to get the date, seconds, and notes and put it into the study_sessions table to save it 
+# save session route that uses POST and JSON to get the date, seconds, and notes and put it into the study_sessions table to save it. uses 204  because it doesn't have to return anything but it works.
 @app.route("/save_session", methods=["POST"])
 def save_session():
     data = request.get_json()
@@ -314,7 +314,7 @@ def delete_journal(id):
     conn.close()
     return redirect("/journal")
 
-# edit route for journal entries which takes the content with JSON and updates the journals table with it where the old content was 
+# edit route for journal entries which takes the content with JSON and updates the journals table with it where the old content was. Uses code 204 because it works but doesn't have to return anything 
 @app.route("/journal/edit/<int:id>", methods=["POST"])
 def edit_journal(id):
     data = request.get_json()
@@ -415,3 +415,4 @@ def edit_event(id):
 if __name__ == "__main__":
 
     app.run(debug=True)
+
