@@ -45,8 +45,7 @@ Features
 
 Installation
 1. Clone the repo
-git clone https://github.com/your-username/productivity-dashboard.git
-cd productivity-dashboard
+git clone 
 
 2. Install dependencies
 pip install flask
@@ -55,7 +54,7 @@ pip install flask
 python app.py
 
 4. Open in browser
-http://localhost:5000
+Find HTML link in browser
 
 Database Schema
 
