@@ -4,30 +4,19 @@ Purpose
 
 This project is a full-featured productivity dashboard combining several tools into one integrated interface:
 
-Task management
-
-Goal tracking
-
-Journaling
-
-Study session tracking
-
-Daily event scheduling
-
-The system is built for clarity, low friction, and fast local performance.
-
-The architecture follows a lightweight MVC style:
-
-Models: SQLite tables
-
-Views: Jinja2 templates
-
-Controllers: Flask routes
-
-Application Components
-Layout Template
-
-All pages extend layout.html 
+  Task management
+  -  Goal tracking
+  -  Journaling
+  -  Study session tracking
+  -  Daily event scheduling
+  -  The system is built for clarity, low friction, and fast local performance.
+  -  The architecture follows a lightweight MVC style:
+  -  Models: SQLite tables
+  -  Views: Jinja2 templates
+  -  Controllers: Flask routes
+  -  Application Components
+  -  Layout Template
+  -  All pages extend layout.html 
 
 layout
   Global navigation bar
