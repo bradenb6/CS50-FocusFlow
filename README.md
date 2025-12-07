@@ -43,20 +43,6 @@ Features
   -  Add, edit, delete events
   -  Event modals with category → color mapping
 
-  Project Structure
-project/
-│-- app.py
-│-- database.db
-│-- templates/
-│   │-- index.html
-│   │-- tasks.html
-│   │-- goals.html
-│   │-- journal.html
-│   │-- days.html
-│-- static/
-│   │-- (CSS, JS)
-│-- README.md
-
 Installation
 1. Clone the repo
 git clone https://github.com/your-username/productivity-dashboard.git
