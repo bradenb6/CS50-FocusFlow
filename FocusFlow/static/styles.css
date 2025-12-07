@@ -1,10 +1,4 @@
-/* =======================
-   VERSION A.2 — FULL OPTIMIZED & FIXED
-   Part 1 of 4
-   (VARIABLES, GLOBAL, UTILITIES, BUTTONS, CARDS, NAVBAR, CALENDAR BASICS)
-   ======================= */
-
-/* ---------------- VARIABLES ---------------- */
+/*Variables*/
 :root {
   --bg: #f8f8f8;
   --card: #ffffff;
@@ -23,7 +17,7 @@
   --page-top-offset: 120px; /* ensures content clears fixed navbar */
 }
 
-/* ---------------- RESET & GLOBALS ---------------- */
+/* Resets and Globals */
 * { box-sizing: border-box; }
 html, body { height: 100%; }
 body {
@@ -42,12 +36,12 @@ body {
 /* ensure main page content stretches full width if needed */
 .page-content { width: 100%; }
 
-/* ---------------- UTILITIES ---------------- */
+/* Utilities */
 .hidden { display: none !important; }
 .center-btn { display: flex; justify-content: center; margin-bottom: 15px; }
 .entries-header { text-align: center; }
 
-/* ---------------- BUTTONS (centralized) ---------------- */
+/* Buttons */
 .btn {
   padding: 8px 14px;
   border: none;
@@ -86,7 +80,7 @@ body {
 /* small action button hover consistency */
 .edit-btn:hover, .save-btn:hover { background: var(--accent-hover); }
 
-/* ---------------- REUSABLE CARD / FORM STYLES ---------------- */
+/* Reuable */
 .card {
   background: var(--card);
   padding: 20px;
@@ -966,5 +960,6 @@ nav a.active { background: rgba(255,255,255,0.35); font-weight: 700; }
 .center-btn, .toggle-form-btn, .journal-entry-btn {
   margin-top: 0;
 }
+
 
 /* End of Version A.2 */
