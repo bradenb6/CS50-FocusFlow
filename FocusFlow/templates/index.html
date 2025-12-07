@@ -3,17 +3,19 @@
 {% block title %}Calendar{% endblock %}
 
 {% block content %}
+
+    <!-- This is the banner for the study mode that pops up under the nav bar and is initially hidden -->
     <div id="session-banner" class="hidden session-banner">
         <span id="session-timer">00:00:00</span>
         <button id="end-session-btn" class="end-session-btn">End Session</button>
     </div>
 
+    <!-- This is the code for the actual calendar and builds the previous and next buttons along with the header and then the day labels (sun - sat)-->
     <div class="calendar-container">
         <div class="calendar-header">
             <button id="prevBtn" onclick="prevM()">Previous</button>
             <h2 id="monthYear"></h2>
             <button id="nextBtn" onclick="nextM()">Next</button>
-            <!-- <button id="start-session-btn" class="session-btn">Start Session</button> -->
         </div>
         <table id="calendarDates">
             <thead>
@@ -27,11 +29,13 @@
                     <th>Sat</th>
                 </tr>
             </thead>
+            <!-- here is where the calendar is added, calendar.js builds this and adds it -->
             <tbody id="calendarBody">
             </tbody>
         </table>
     </div>
 
+    <!-- Adds the session notes modal that is originally hidden but shows up when end session is clicked  -->
     <div id="session-notes-modal" class="modal-overlay hidden">
 
         <div class="reflection-modal-content">
@@ -54,17 +58,10 @@
     </div>
 
 </div>
-
-    <!-- <div id="eventPopup" class="event-popup" style="display:none;">
-        <div class="event-popup-content">
-            <h3 id="eventDateDisplay"></h3>
-            <input type="text" id="eventInput" placeholder="Add an event..." />
-            <button id="saveEventBtn">Save Event</button>
-            <button id="closeEventBtn">Close</button>
-        </div>
-    </div> -->
 {% endblock %}
 
 {% block scripts %}
+    <!-- connects this to calendar.js -->
     <script src="{{ url_for('static', filename='calendar.js') }}"></script>
+
 {% endblock %}
