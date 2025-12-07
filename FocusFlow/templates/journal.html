@@ -3,11 +3,13 @@
 {% block title %}Calendar{% endblock %}
 
 {% block content %}
+    <!-- adds the new entry button for the journal -->
     <div class="journal">
         <div class="center-btn">
             <button class="toggle-form-btn" onclick="toggleJournalForm()">New Entry +</button>
         </div>
 
+        <!-- builds the journal entry form that is originally hidden and uses post to add an entry and a date to the db to be saved -->
         <div id="journal-entry" class="journal-entry hidden">
             <form method="POST" action="{{ url_for('journal') }}">
                 <label class="entry-header">What's on your mind?</label>
@@ -20,10 +22,12 @@
             </form>
         </div>
 
+        <!-- header for the entries to show up under -->
         <div class="entries-header">
             <h2>Your Entries: </h2>
         </div>
 
+        <!-- builds a journal list of buttons displaying the date that can be clicked to expand the entry -->
         <ul class="journal-list">
             {% for j in entries %}
                 <li class="journal-item">
@@ -32,9 +36,11 @@
                         {{ j["date"] }}
                     </button>
 
+                    <!-- content that is originally hidden and expands when the date button is clicked -->
                     <div id="entry-{{ j['id'] }}" class="journal-content hidden">
                         <p id="content-{{ j['id'] }}">{{ j["content"] }}</p>
 
+                        <!-- adds buttons to the journal entry to edit and delete the entry -->
                         <div class="journal-buttons">
                             <button type="button" onclick="startEdit({{ j['id'] }})" class="edit-btn">Edit</button>
 
@@ -43,7 +49,8 @@
                             </form>
                         </div>
                     </div>
-                    
+
+                    <!-- builds the edit section that shows up when the edit button is clicked and updates the db with the new content -->
                     <div id="edit-{{ j['id'] }}" class="hidden edit-section">
                         <textarea id="edit-text-{{ j['id'] }}" rows="5">{{ j["content"] }}</textarea>
                         <button onclick="saveEdit({{ j['id'] }})" class="save-btn">Save</button>
@@ -55,6 +62,7 @@
     </div>
 {% endblock %}
 
+<!-- connects this to journal.js -->
 {% block scripts %}
     <script src="{{ url_for('static', filename='journal.js') }}"></script>
 {% endblock %}
