@@ -169,39 +169,6 @@ def day_details(date):
         ]
     }
 
-
-# WHAT DOES THIS DOOOOOO
-@app.route("/delete_session/<int:id>", methods=["POST"])
-def delete_session(id):
-    conn = get_db()
-    cur = conn.cursor()
-
-    cur.execute("DELETE FROM study_sessions WHERE id = ?", (id,))
-    conn.commit()
-    conn.close()
-
-    return ("", 204)
-
-@app.route("/edit_session/<int:id>", methods=["POST"])
-def edit_session(id):
-    data = request.get_json()
-    seconds = data["seconds"]
-    notes = data["notes"]
-
-    conn = get_db()
-    cur = conn.cursor()
-
-    cur.execute("""
-        UPDATE study_sessions
-        SET seconds = ?, notes = ?
-        WHERE id = ?
-    """, (seconds, notes, id))
-
-    conn.commit()
-    conn.close()
-
-    return ("", 204)
-
 @app.route("/tasks", methods=["GET", "POST"])
 def tasks():
     conn = get_db()
@@ -415,4 +382,5 @@ def edit_event(id):
 if __name__ == "__main__":
 
     app.run(debug=True)
+
 
