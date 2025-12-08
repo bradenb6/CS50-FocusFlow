@@ -5,11 +5,12 @@
 {% block content %}
 <div class="tasks-container">
 
+    <!-- add task button is added to the top -->
     <div class="center-btn">
         <button class="toggle-form-btn" onclick="toggleTaskForm()">Add Task +</button>
     </div>
 
-    <!-- ADD TASK FORM -->
+    <!-- add task form that asks for a task, description, and deadline -->
     <div id="task-form" class="task-form hidden">
         <form action="/tasks" method="POST">
 
@@ -26,19 +27,22 @@
         </form>
     </div>
 
-    <!-- LIST OF TASKS -->
+    <!-- list of tasks using jinja to display it  -->
     <div class="tasks-list">
         <h2>Your Tasks</h2>
 
+        <!-- checks if there is any tasks to display -->
         {% if tasks %}
         <ul class="task-list">
 
+            <!-- displays the tasks -->
             {% for t in tasks %}
             <li class="task-item">
                 <strong>{{ t["title"] }}</strong>
                 <p>{{ t["description"] }}</p>
                 <span class="deadline">Deadline: {{ t["deadline"] }}</span>
 
+                <!-- adds the edit button and gives the data to the edit function -->
                 <div class="task-buttons">
                     <button class="edit-btn"
                         onclick="openEditModal(
@@ -50,6 +54,7 @@
                         Edit
                     </button>
 
+                    <!-- adds the delete button -->
                     <form method="POST" action="/tasks/delete/{{ t['id'] }}">
                         <button class="delete-btn" type="submit">Delete</button>
                     </form>
@@ -59,6 +64,7 @@
 
         </ul>
 
+        <!-- if no taskts, shows this -->
         {% else %}
         <p class="no-tasks">No tasks added yet.</p>
         {% endif %}
@@ -66,7 +72,7 @@
 
 </div>
 
-<!-- EDIT MODAL -->
+<!-- edit modal that lets the user update the information in the tasks -->
 <div id="edit-modal" class="modal hidden">
     <div class="modal-content">
         <h2>Edit Task</h2>
@@ -91,6 +97,8 @@
 
 {% endblock %}
 
+<!-- connects this to tasks.js -->
 {% block scripts %}
 <script src="{{ url_for('static', filename='tasks.js') }}"></script>
+
 {% endblock %}
