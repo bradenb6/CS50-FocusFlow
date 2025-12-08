@@ -2,7 +2,7 @@
 Productivity Dashboard
 
 A full-featured personal productivity system built with Flask and SQLite
-Goals • Tasks • Journal • Study Sessions • Daily Events
+Goals, Tasks, Journal, Study Sessions, Daily Events
 
 Overview
 
@@ -12,7 +12,7 @@ Overview
   -  Daily event calendar
   -  Journal system
   -  Study session tracker (Pomodoro-style)
-Built using Flask, SQLite, and vanilla JS, the project is lightweight, fast, and easy to    deploy.
+Built using Flask, SQLite, and vanilla JS, the project is lightweight, fast, and easy to deploy.
 
 Features
   Tasks
