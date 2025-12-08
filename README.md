@@ -41,7 +41,7 @@ Features
   -  24-hour grid
   -  Color-coded events
   -  Add, edit, delete events
-  -  Event modals with category → color mapping
+  -  Event modals with category -> color mapping
 
 Installation
 1. Clone the repo. 
