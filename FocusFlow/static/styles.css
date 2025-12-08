@@ -37,7 +37,7 @@ body {
 .page-content { width: 100%; }
 
 /* Utilities */
-.hidden { display: none !important; }
+.hidden { display: none; }
 .center-btn { display: flex; justify-content: center; margin-bottom: 15px; }
 .entries-header { text-align: center; }
 
@@ -223,7 +223,7 @@ nav a.active { background: rgba(255,255,255,0.35); font-weight: 700; }
   border-radius: 8px;
 }
 
-/* \small layout containers */
+/* small layout containers */
 .tasks-container, .goals-container {
   max-width: 800px;
   margin-left: auto;
@@ -247,10 +247,10 @@ nav a.active { background: rgba(255,255,255,0.35); font-weight: 700; }
 
 .day-container { max-width: 900px; margin-left: auto; margin-right: auto; }
 
-/* Calendar for today */
+/* Calendar for the current day */
 .calendar-today {
-  background: #dfe6ff !important;
-  border: 2px solid var(--accent) !important;
+  background: #dfe6ff;
+  border: 2px solid var(--accent);
   font-weight: bold;
 }
 
@@ -375,7 +375,7 @@ nav a.active { background: rgba(255,255,255,0.35); font-weight: 700; }
   z-index: 999;
 }
 
-#edit-modal.hidden { display: none !important; }
+#edit-modal.hidden { display: none; }
 
 #edit-modal .modal-content {
   width: 420px;            
@@ -535,7 +535,7 @@ nav a.active { background: rgba(255,255,255,0.35); font-weight: 700; }
 }
 
 .goals-container #edit-modal.hidden {
-  display: none !important;
+  display: none;
 }
 
 .goals-container #edit-modal .modal-content {
@@ -576,7 +576,7 @@ nav a.active { background: rgba(255,255,255,0.35); font-weight: 700; }
 /* journal page css */
 
 .journal {
-  margin-top: var(--page-top-offset) !important;   /* THIS FIXES YOUR BUTTON ISSUE */
+  margin-top: var(--page-top-offset);   
 }
 
 /* The section that contains the “New Entry +” button */
@@ -603,7 +603,7 @@ nav a.active { background: rgba(255,255,255,0.35); font-weight: 700; }
   background: var(--accent-hover);
 }
 
-/* ---------- Journal Entry Form ---------- */
+/* journal entry form */
 .journal-entry {
   max-width: 650px;
   margin-left: auto;
@@ -643,7 +643,7 @@ nav a.active { background: rgba(255,255,255,0.35); font-weight: 700; }
   background: var(--accent-hover);
 }
 
-/* ---------- Journal List ---------- */
+/* journal list */
 .journal-list {
   list-style: none;
   padding: 0;
@@ -683,7 +683,7 @@ nav a.active { background: rgba(255,255,255,0.35); font-weight: 700; }
 .journal-buttons .edit-btn { background: var(--accent); color: white; }
 .journal-buttons .delete-btn { background: var(--danger); color: white; }
 
-/* ---------- No Entries Placeholder ---------- */
+/* no entries placeholder css */
 .no-entries {
   text-align: center;
   padding: 20px;
@@ -691,15 +691,7 @@ nav a.active { background: rgba(255,255,255,0.35); font-weight: 700; }
   font-style: italic;
 }
 
-/* =======================
-   VERSION A.2 — FULL OPTIMIZED & FIXED
-   Part 4 of 4 (FINAL)
-   (STUDY MODE, DAY VIEW, EVENT MODALS, FINAL CLEANUP)
-   ======================= */
-
-/* =======================
-   STUDY MODE (SESSION BANNER + CONTROLS)
-   ======================= */
+/* study mode css */
 
 .session-banner {
   width: 100%;
@@ -712,7 +704,7 @@ nav a.active { background: rgba(255,255,255,0.35); font-weight: 700; }
   font-size: 22px;
   font-weight: bold;
   position: fixed;
-  top: calc(var(--page-top-offset) - 55px); /* positions banner beneath nav */
+  top: calc(var(--page-top-offset) - 55px); 
   left: 0;
   z-index: 900;
 }
@@ -728,7 +720,7 @@ nav a.active { background: rgba(255,255,255,0.35); font-weight: 700; }
   cursor: pointer;
 }
 
-/* session badges / details */
+/* session badges and details */
 .session-badge {
   background: var(--accent);
   color: white;
@@ -755,9 +747,7 @@ nav a.active { background: rgba(255,255,255,0.35); font-weight: 700; }
 }
 .detail-row:last-child { border-bottom: none; }
 
-/* =======================
-   REFLECTION MODAL (session notes) - 450px preserved
-   ======================= */
+/* reflection modal*/
 
 #session-notes-modal {
   position: fixed;
@@ -774,7 +764,7 @@ nav a.active { background: rgba(255,255,255,0.35); font-weight: 700; }
   padding: 25px;
   border-radius: 12px;
   width: 90%;
-  max-width: 450px; /* PRESERVED ORIGINAL */
+  max-width: 450px; 
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
   z-index: 1000;
 }
@@ -785,9 +775,7 @@ nav a.active { background: rgba(255,255,255,0.35); font-weight: 700; }
 .reflection-save-btn { background: var(--accent); color: white; border: none; padding: 10px; border-radius: 8px; cursor: pointer; }
 .reflection-cancel-btn { background: #ccc; border: none; padding: 10px; border-radius: 8px; cursor: pointer; }
 
-/* =======================
-   DAY VIEW (Hourly Grid)
-   ======================= */
+/* day view css */
 
 .day-container {
   margin-top: var(--page-top-offset);
@@ -823,9 +811,7 @@ nav a.active { background: rgba(255,255,255,0.35); font-weight: 700; }
   background: white;
 }
 
-/* =======================
-   EVENT BLOCKS
-   ======================= */
+/* event blocks css */
 
 .event {
   background: var(--event-color, var(--accent));
@@ -847,7 +833,7 @@ nav a.active { background: rgba(255,255,255,0.35); font-weight: 700; }
   display: flex;
   gap: 4px;
 }
-.event-buttons.hidden { display: none !important; }
+.event-buttons.hidden { display: none; }
 
 .event-buttons button {
   border: none;
@@ -858,9 +844,7 @@ nav a.active { background: rgba(255,255,255,0.35); font-weight: 700; }
   cursor: pointer;
 }
 
-/* =======================
-   EVENT MODAL (350px preserved)
-   ======================= */
+/* event modal css */
 
 .modal-overlay {
   position: fixed;
@@ -874,7 +858,7 @@ nav a.active { background: rgba(255,255,255,0.35); font-weight: 700; }
 
 #eventModal {
   background: #fff;
-  width: 350px; /* PRESERVED ORIGINAL */
+  width: 350px; 
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 2px 12px rgba(0,0,0,0.2);
@@ -900,17 +884,13 @@ nav a.active { background: rgba(255,255,255,0.35); font-weight: 700; }
 .event-save-btn { background: var(--accent); color: white; padding: 8px 14px; border: none; border-radius: 6px; cursor: pointer; }
 .event-cancel-btn { background: #ccc; padding: 8px 14px; border: none; border-radius: 6px; cursor: pointer; }
 
-/* =======================
-   FINAL CONSISTENCY & SAFETY
-   ======================= */
 
-/* Ensure hidden always wins */
-.hidden { display: none !important; }
+.hidden { display: none; }
 
 /* Ensure modals always appear on top */
 .modal, .modal-overlay { z-index: 999; }
 
-/* Safety: ensure top offset for forms and main containers is consistent */
+/* ensure top offset for forms and main containers is consistent */
 .calendar-container,
 .tasks-container,
 .goals-container,
@@ -936,6 +916,4 @@ nav a.active { background: rgba(255,255,255,0.35); font-weight: 700; }
   margin-top: 0;
 }
 
-
-/* End of Version A.2 */
 
