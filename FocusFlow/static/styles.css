@@ -14,7 +14,7 @@
   --radius-md: 10px;
   --radius-sm: 6px;
   --transition-fast: 0.2s ease;
-  --page-top-offset: 120px; /* ensures content clears fixed navbar */
+  --page-top-offset: 120px; 
 }
 
 /* Resets and Globals */
@@ -113,7 +113,7 @@ input:focus, textarea:focus, select:focus {
   border-color: var(--accent);
 }
 
-/* ---------------- NAVBAR ---------------- */
+/* navbar css */
 nav {
   width: 100%;
   background: var(--nav-bg);
@@ -157,9 +157,9 @@ nav a.active { background: rgba(255,255,255,0.35); font-weight: 700; }
 }
 .study-nav-btn:hover { background: var(--accent-hover); }
 
-/* ---------------- CALENDAR CONTAINER & HEADER ---------------- */
+/* calendar container and header css */
 .calendar-container {
-  margin-top: calc(var(--page-top-offset) - 50px); /* visually similar to original; can be overridden later */
+  margin-top: calc(var(--page-top-offset) - 50px); 
   background: var(--card);
   padding: 20px 30px;
   border-radius: 12px;
@@ -179,7 +179,7 @@ nav a.active { background: rgba(255,255,255,0.35); font-weight: 700; }
 }
 .calendar-header h2 { margin: 0; font-size: 1.4rem; font-weight: 600; }
 
-/* Prev/Next buttons: keep look consistent */
+/* Prev/Next buttons */
 .calendar-header button {
   background: var(--accent);
   color: white;
@@ -192,7 +192,7 @@ nav a.active { background: rgba(255,255,255,0.35); font-weight: 700; }
 }
 .calendar-header button:hover { background: #6a84ff; }
 
-/* Calendar table (ID corrected) */
+/* Calendar table */
 #calendarDates {
   width: 100%;
   border-collapse: collapse;
@@ -223,7 +223,7 @@ nav a.active { background: rgba(255,255,255,0.35); font-weight: 700; }
   border-radius: 8px;
 }
 
-/* ---------------- SMALL LAYOUT HELPERS ---------------- */
+/* \small layout containers */
 .tasks-container, .goals-container {
   max-width: 800px;
   margin-left: auto;
@@ -231,7 +231,6 @@ nav a.active { background: rgba(255,255,255,0.35); font-weight: 700; }
   padding: 20px;
 }
 
-/* Toggle large form button kept visually identical */
 .toggle-form-btn {
   background: var(--accent);
   color: white;
@@ -245,16 +244,10 @@ nav a.active { background: rgba(255,255,255,0.35); font-weight: 700; }
 }
 .toggle-form-btn:hover { background: var(--accent-hover); }
 
-/* Ensure day container exists and centered (explicit here for Part1) */
+
 .day-container { max-width: 900px; margin-left: auto; margin-right: auto; }
 
-/* =======================
-   VERSION A.2 — FULL OPTIMIZED & FIXED
-   Part 2 of 4
-   (CALENDAR ADVANCED, TASKS, TASK MODAL)
-   ======================= */
-
-/* ---------- CALENDAR — ACTIVE DAY / TODAY MARKERS ---------- */
+/* Calendar for today */
 .calendar-today {
   background: #dfe6ff !important;
   border: 2px solid var(--accent) !important;
@@ -266,7 +259,7 @@ nav a.active { background: rgba(255,255,255,0.35); font-weight: 700; }
   border-left: 4px solid var(--accent);
 }
 
-/* ---------- CALENDAR — EVENT DOTS IN CELLS ---------- */
+/* the event dots in cells in the calendar*/
 .calendar-event-dot {
   width: 7px;
   height: 7px;
@@ -275,10 +268,7 @@ nav a.active { background: rgba(255,255,255,0.35); font-weight: 700; }
   margin-top: 4px;
 }
 
-/* ============================================
-   TASKS PAGE
-   ============================================ */
-
+/* tasks css */
 .tasks-container {
   margin-top: var(--page-top-offset);
 }
@@ -315,7 +305,7 @@ nav a.active { background: rgba(255,255,255,0.35); font-weight: 700; }
   background: var(--accent-hover);
 }
 
-/* ---------- TASKS LIST ---------- */
+/* tasks list */
 .tasks-list { margin-top: 25px; }
 
 .task-item {
@@ -362,11 +352,10 @@ nav a.active { background: rgba(255,255,255,0.35); font-weight: 700; }
 .task-buttons .edit-btn { background: var(--accent); color: white; }
 .task-buttons .delete-btn { background: var(--danger); color: white; }
 
-/* Button hover fixes */
 .task-buttons .edit-btn:hover { background: var(--accent-hover); }
 .task-buttons .delete-btn:hover { filter: brightness(0.9); }
 
-/* ---------- EMPTY TASK MESSAGE ---------- */
+/* empty task message css */
 .no-tasks {
   text-align: center;
   color: var(--muted);
@@ -374,9 +363,7 @@ nav a.active { background: rgba(255,255,255,0.35); font-weight: 700; }
   font-style: italic;
 }
 
-/* ============================================
-   TASKS — EDIT MODAL (420px preserved)
-   ============================================ */
+/* tasks edit modal*/
 
 #edit-modal {
   position: fixed;
@@ -391,7 +378,7 @@ nav a.active { background: rgba(255,255,255,0.35); font-weight: 700; }
 #edit-modal.hidden { display: none !important; }
 
 #edit-modal .modal-content {
-  width: 420px;             /* PRESERVED */
+  width: 420px;            
   background: white;
   padding: 25px;
   border-radius: var(--radius-lg);
@@ -420,7 +407,7 @@ nav a.active { background: rgba(255,255,255,0.35); font-weight: 700; }
   border-color: var(--accent);
 }
 
-/* Save + Cancel buttons inside modal */
+/* Save and cancel buttons inside modal */
 #edit-modal .modal-buttons {
   display: flex;
   justify-content: space-between;
@@ -436,16 +423,7 @@ nav a.active { background: rgba(255,255,255,0.35); font-weight: 700; }
   to   { opacity: 1; transform: scale(1); }
 }
 
-/* =======================
-   VERSION A.2 — FULL OPTIMIZED & FIXED
-   Part 3 of 4
-   (GOALS, JOURNAL, JOURNAL BUTTON FIX)
-   ======================= */
-
-/* ============================================
-   GOALS PAGE
-   ============================================ */
-
+/* goals page */
 .goals-container {
   margin-top: var(--page-top-offset);
   max-width: 800px;
@@ -454,7 +432,7 @@ nav a.active { background: rgba(255,255,255,0.35); font-weight: 700; }
   padding: 20px;
 }
 
-/* ---------- Goal Form ---------- */
+/* goal form css */
 .goal-form {
   display: flex;
   flex-direction: column;
@@ -487,7 +465,7 @@ nav a.active { background: rgba(255,255,255,0.35); font-weight: 700; }
   background: var(--accent-hover);
 }
 
-/* ---------- Goals List ---------- */
+/* goals list css */
 .goal-list {
   margin-top: 25px;
 }
@@ -536,7 +514,7 @@ nav a.active { background: rgba(255,255,255,0.35); font-weight: 700; }
 
 .goal-buttons .edit-btn:hover { background: var(--accent-hover); }
 
-/* ---------- No Goals Placeholder ---------- */
+/* no goals placeholder*/
 .no-goals {
   color: var(--muted);
   text-align: center;
@@ -544,7 +522,7 @@ nav a.active { background: rgba(255,255,255,0.35); font-weight: 700; }
   font-style: italic;
 }
 
-/* ---------- Goals Edit Modal (420px preserved) ---------- */
+/* goals edit modal */
 
 .goals-container #edit-modal {
   position: fixed;
@@ -561,7 +539,7 @@ nav a.active { background: rgba(255,255,255,0.35); font-weight: 700; }
 }
 
 .goals-container #edit-modal .modal-content {
-  width: 420px; /* PRESERVE ORIGINAL */
+  width: 420px; 
   background: white;
   padding: 25px 30px;
   border-radius: var(--radius-lg);
@@ -589,17 +567,14 @@ nav a.active { background: rgba(255,255,255,0.35); font-weight: 700; }
   border-color: var(--accent);
 }
 
-/* CANCEL button inside goals modal */
+/* cancel button inside goals modal */
 .goals-container #edit-modal .cancel-btn {
   background: #ccc;
   color: #222;
 }
 
-/* ============================================
-   JOURNAL PAGE
-   ============================================ */
+/* journal page css */
 
-/* ---------- MAIN journal container (FIX FOR NAVBAR OVERLAP) ---------- */
 .journal {
   margin-top: var(--page-top-offset) !important;   /* THIS FIXES YOUR BUTTON ISSUE */
 }
@@ -963,3 +938,4 @@ nav a.active { background: rgba(255,255,255,0.35); font-weight: 700; }
 
 
 /* End of Version A.2 */
+
