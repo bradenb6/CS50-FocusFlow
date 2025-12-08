@@ -22,7 +22,7 @@ Features
 
   Goals
   -  long-term goal tracking
-  -  Edit + delete
+  -  Edit and delete
   -  Automatically sorted
 
   Journals
@@ -51,7 +51,7 @@ At the green code button, download folder. This will give you a zip folder. Find
 Install VS code and python if not done already
 
 3. Open Folder
-In VS code upload folder to VS code
+In VS code upload folder to VS code and open it
 
 5. Run the server
 using the function python app.py
