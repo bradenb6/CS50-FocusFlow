@@ -3,7 +3,7 @@
 {% block title %}Day View{% endblock %}
 
 {% block content %}
-
+<!-- adds the day label and the add event button to the day page and then the day grid is built below with js -->
 <div class="day-container">
     <h2 id="dayLabel">{{ date }}</h2>
 
@@ -12,7 +12,7 @@
     <div id="dayGrid"></div>
 </div>
 
-<!-- EVENT MODAL -->
+<!-- event modal that is originally hidden and includes a form asking for a title, start time, end time, and category -->
 <div id="eventModal" class="modal-overlay hidden">
     <div class="eventModal-content">
         <h3 id="eventModalTitle">Add Event</h3>
@@ -29,6 +29,7 @@
             <label>End Time:</label>
             <input id="endTime" type="time">
 
+            <!-- different categories have different colors  -->
             <label>Category</label>
             <select id="category">
                 <option value="School" data-color="#3498db">School</option>
@@ -39,6 +40,7 @@
             </select>
         </div>
 
+        <!-- buttons to save or cancel -->
         <div class="event-modal-btns">
             <button class="event-save-btn" onclick="saveEvent()">Save</button>
             <button class="event-cancel-btn" onclick="closeEventModal()">Cancel</button>
@@ -48,6 +50,8 @@
 
 {% endblock %}
 
+<!-- connects this to days.js -->
 {% block scripts %}
 <script src="{{ url_for('static', filename='days.js') }}"></script>
+
 {% endblock %}
