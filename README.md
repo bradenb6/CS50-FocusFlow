@@ -137,6 +137,9 @@ Development
 
   The app will recreate all tables automatically.
 
+Video with implementation and presentation of project
+- https://youtu.be/LrYy6tI94-4
+  
 License
 
   MIT License — free to use, modify, and share.
