@@ -169,6 +169,8 @@ def day_details(date):
         ]
     }
 
+
+# tasks route that if reached by GET selects all of the tasks from the db table and orders it by deadline, if reached by POST gets the title, description, and deadline from the form and adds it into a new task in the table
 @app.route("/tasks", methods=["GET", "POST"])
 def tasks():
     conn = get_db()
@@ -191,6 +193,7 @@ def tasks():
     conn.close()
     return render_template("tasks.html", tasks=tasks)
 
+# edit route for tasks, uses POST and gets the title, description, and deadline from the form and then updates the table with these values
 @app.route("/tasks/edit/<int:id>", methods=["POST"])
 def edit_task(id):
     title = request.form["title"]
@@ -209,6 +212,7 @@ def edit_task(id):
     conn.close()
     return redirect("/tasks")
 
+# delete tasks route, goes into the db at the id of the task clicked on and deletes it from the table
 @app.route("/tasks/delete/<int:id>", methods=["POST"])
 def delete_task(id):
     conn = get_db()
@@ -295,11 +299,13 @@ def edit_journal(id):
 
     return ("", 204)
 
+# Gets the date and returns it so the js can use it to display the events 
 @app.route("/day")
 def day_view():
     date = request.args.get("date")
     return render_template("days.html", date=date)
 
+# events route, when reached by POST gets the data with JSON and then inserts it into the evetns table
 @app.route("/events", methods=["POST"])
 def save_event():
     data = request.get_json()
@@ -323,6 +329,7 @@ def save_event():
     conn.close()
     return ("", 204)
 
+# shows the events on that day by getting each event at that date and returning the data so it can be displayed 
 @app.route("/events/<date>")
 def events_for_day(date):
     conn = get_db()
@@ -350,6 +357,7 @@ def events_for_day(date):
         for r in rows
     ])
 
+# goes into the events table and deletes the event that was clicked on
 @app.post("/events/delete/<int:id>")
 def delete_event(id):
     conn = get_db()
@@ -360,6 +368,7 @@ def delete_event(id):
     conn.close()
     return ("", 204)
 
+# edits the events page by updated the events table with the new data that it got with JSON
 @app.post("/events/edit/<int:id>")
 def edit_event(id):
     data = request.get_json()
@@ -382,5 +391,6 @@ def edit_event(id):
 if __name__ == "__main__":
 
     app.run(debug=True)
+
 
 
